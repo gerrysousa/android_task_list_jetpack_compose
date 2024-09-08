@@ -25,7 +25,6 @@ import com.gdev.listadetarefacompose.ui.theme.WHITE
 fun ListaTarefas(
     navController: NavController
 ) {
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -45,13 +44,13 @@ fun ListaTarefas(
         containerColor = BLACK,
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {navController.navigate("salvarTarefa")},
+                onClick = { navController.navigate("salvarTarefa") },
                 containerColor = Purple40,
-            ){
-              Image(
-                  imageVector = ImageVector.vectorResource(id = R.drawable.ic_add),
-                  contentDescription ="Icone de adicionar tarega"
-              )
+            ) {
+                Image(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_add),
+                    contentDescription = "Icone de adicionar tarega"
+                )
             }
         }
     ) {
