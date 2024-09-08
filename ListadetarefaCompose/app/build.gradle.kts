@@ -66,4 +66,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    var nav_version = "2.5.3"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 }
