@@ -1,6 +1,8 @@
 package com.gdev.listadetarefacompose.view
 
 import android.annotation.SuppressLint
+import android.widget.Toast
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,9 +24,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -32,6 +36,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.gdev.listadetarefacompose.components.Botao
 import com.gdev.listadetarefacompose.components.CaixaDeTexto
+import com.gdev.listadetarefacompose.datasource.DataSource
+import com.gdev.listadetarefacompose.helpers.Constantes.PRIORIDADE_ALTA
+import com.gdev.listadetarefacompose.helpers.Constantes.PRIORIDADE_BAIXA
+import com.gdev.listadetarefacompose.helpers.Constantes.PRIORIDADE_MEDIA
+import com.gdev.listadetarefacompose.helpers.Constantes.SEM_PRIORIDADE
+import com.gdev.listadetarefacompose.repository.TarefasRepository
 import com.gdev.listadetarefacompose.ui.theme.Purple40
 import com.gdev.listadetarefacompose.ui.theme.RADIO_BUTTON_GREEN_DISABLE
 import com.gdev.listadetarefacompose.ui.theme.RADIO_BUTTON_GREEN_SELECTED
@@ -40,11 +50,17 @@ import com.gdev.listadetarefacompose.ui.theme.RADIO_BUTTON_RED_SELECTED
 import com.gdev.listadetarefacompose.ui.theme.RADIO_BUTTON_YELLOW_DISABLE
 import com.gdev.listadetarefacompose.ui.theme.RADIO_BUTTON_YELLOW_SELECTED
 import com.gdev.listadetarefacompose.ui.theme.WHITE
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SalvarTarefa(navController: NavController) {
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    val tarefasRepository = TarefasRepository()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -150,7 +166,68 @@ fun SalvarTarefa(navController: NavController) {
             }
 
             Botao(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    var mensagem = true
+
+                    scope.launch(Dispatchers.IO) {
+                        if (tituloTarefa.isEmpty()) {
+                            mensagem = false
+                        } else if (tituloTarefa.isNotEmpty() && tarefaSemPrioridade) {
+                            tarefasRepository.salvarTarefa(
+                                tituloTarefa,
+                                decricaoTarefa,
+                                SEM_PRIORIDADE
+                            )
+                            mensagem = true
+                        } else if (tituloTarefa.isNotEmpty() && tarefaPrioridadeBaixa) {
+                            tarefasRepository.salvarTarefa(
+                                tituloTarefa,
+                                decricaoTarefa,
+                                PRIORIDADE_BAIXA
+                            )
+                            mensagem = true
+                        } else if (tituloTarefa.isNotEmpty() && tarefaPrioridadeMedia) {
+                            tarefasRepository.salvarTarefa(
+                                tituloTarefa,
+                                decricaoTarefa,
+                                PRIORIDADE_MEDIA
+                            )
+                            mensagem = true
+                        } else if (tituloTarefa.isNotEmpty() && tarefaPrioridadeAlta) {
+                            tarefasRepository.salvarTarefa(
+                                tituloTarefa,
+                                decricaoTarefa,
+                                PRIORIDADE_ALTA
+                            )
+                            mensagem = true
+                        } else {
+                            tarefasRepository.salvarTarefa(
+                                tituloTarefa,
+                                decricaoTarefa,
+                                SEM_PRIORIDADE
+                            )
+                            mensagem = true
+                        }
+                    }
+
+                    scope.launch(Dispatchers.Main) {
+                        if (mensagem) {
+                            Toast.makeText(
+                                context,
+                                "Sucesso ao salvar a tarefa",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            navController.popBackStack()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "O titulo da tarefa é obrigatório",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp)

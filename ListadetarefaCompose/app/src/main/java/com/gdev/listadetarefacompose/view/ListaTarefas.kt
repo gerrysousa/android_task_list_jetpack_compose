@@ -61,33 +61,9 @@ fun ListaTarefas(
             }
         }
     ) {
-        val listaTarefa: MutableList<Tarefa> = mutableListOf(
-            Tarefa(
-                tarefa = "Tarefa 0",
-                descricao = "Descrição da Tarefa 0",
-                prioridade = 0
-            ),
-            Tarefa(
-                tarefa = "Tarefa 1",
-                descricao = "Descrição da Tarefa 1",
-                prioridade = 1
-            ),
-            Tarefa(
-                tarefa = "Tarefa 2",
-                descricao = "Descrição da Tarefa 2",
-                prioridade = 2
-            ),
-            Tarefa(
-                tarefa = "Tarefa 3",
-                descricao = "Descrição da Tarefa 3",
-                prioridade = 3
-            ),
-        )
 
         LazyColumn {
-            itemsIndexed(listaTarefa) { position, _ ->
-                TarefaItem(position, listaTarefa)
-            }
+
         }
     }
 }

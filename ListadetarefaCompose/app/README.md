@@ -57,3 +57,27 @@ implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
 By using the Firebase Android BoM, your app will always use compatible Firebase library versions. Learn more
 =====================================================================================
 
+Criando um banco de dados no Firebase
+- Acesse seu APP: https://console.firebase.google.com/u/1/project/lista-de-tarefa-compose-149ca/firestore
+- Clicar em Firestore Database 
+- Create Database
+- Apos a criação precisa trocar as regras de escrita/leitura do banco
+- Acessar a regras (Rules)
+- E permitir a escrita/leitura do banco sem estar autenticado (true)
+```
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+```
+- E publicar regras
+
+
+Adicionando Depencencia da CloudFirestore
+Add dependencia a nivel de APP
+ - implementation("com.google.firebase:firebase-firestore-ktx")
