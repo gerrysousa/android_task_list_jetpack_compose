@@ -28,7 +28,7 @@ fun TarefaItem(
     position: Int,
     listaTarefa: MutableList<Tarefa>
 ) {
-    val titulo = listaTarefa[position].tarefa
+    val titulo = listaTarefa[position].titulo
     val descricao = listaTarefa[position].descricao
     val prioridade = listaTarefa[position].prioridade
 

@@ -1,7 +1,7 @@
 package com.gdev.listadetarefacompose.model
 
 data class Tarefa(
-    val tarefa: String? = null,
+    val titulo: String? = null,
     val descricao: String? = null,
     val prioridade: Int? = null
 )
