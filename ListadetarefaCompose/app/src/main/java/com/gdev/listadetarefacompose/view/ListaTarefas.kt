@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -35,6 +36,7 @@ fun ListaTarefas(
     navController: NavController
 ) {
     val tarefaRepository = TarefasRepository()
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -69,7 +71,7 @@ fun ListaTarefas(
 
         LazyColumn {
             itemsIndexed(listaTarefas) { index, _,  ->
-                TarefaItem(position =  index, listaTarefa = listaTarefas)
+                TarefaItem(position =  index, listaTarefa = listaTarefas, context = context, navController = navController)
             }
 
         }

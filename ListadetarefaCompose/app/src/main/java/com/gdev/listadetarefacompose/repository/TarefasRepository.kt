@@ -15,4 +15,7 @@ class TarefasRepository {
         return dataSource.recuperarTarefas()
     }
 
+    fun deletarTarefa(titulo: String) {
+        dataSource.deletarTarefa(titulo)
+    }
 }
