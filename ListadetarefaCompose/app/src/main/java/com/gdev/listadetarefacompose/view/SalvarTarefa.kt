@@ -2,9 +2,7 @@ package com.gdev.listadetarefacompose.view
 
 import android.annotation.SuppressLint
 import android.widget.Toast
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,7 +34,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.gdev.listadetarefacompose.components.Botao
 import com.gdev.listadetarefacompose.components.CaixaDeTexto
-import com.gdev.listadetarefacompose.datasource.DataSource
 import com.gdev.listadetarefacompose.helpers.Constantes.PRIORIDADE_ALTA
 import com.gdev.listadetarefacompose.helpers.Constantes.PRIORIDADE_BAIXA
 import com.gdev.listadetarefacompose.helpers.Constantes.PRIORIDADE_MEDIA
@@ -79,11 +76,6 @@ fun SalvarTarefa(navController: NavController) {
         },
         containerColor = WHITE,
     ) { scaffoldPadding ->
-        @androidx.compose.runtime.Composable {
-            Box(modifier = Modifier.padding(scaffoldPadding)) {
-                // Fix topbar over content
-            }
-        }
         Column(
             modifier = Modifier
                 .fillMaxSize()

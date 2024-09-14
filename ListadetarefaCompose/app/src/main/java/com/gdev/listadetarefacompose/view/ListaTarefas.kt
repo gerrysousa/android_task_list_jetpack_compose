@@ -2,8 +2,7 @@ package com.gdev.listadetarefacompose.view
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,16 +13,15 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.gdev.listadetarefacompose.R
 import com.gdev.listadetarefacompose.itemlist.TarefaItem
-import com.gdev.listadetarefacompose.model.Tarefa
 import com.gdev.listadetarefacompose.repository.TarefasRepository
 import com.gdev.listadetarefacompose.ui.theme.BLACK
 import com.gdev.listadetarefacompose.ui.theme.Purple40
@@ -69,11 +67,15 @@ fun ListaTarefas(
     ) {
         val listaTarefas = tarefaRepository.recuperarTarefas().collectAsState(mutableListOf()).value
 
-        LazyColumn {
-            itemsIndexed(listaTarefas) { index, _,  ->
-                TarefaItem(position =  index, listaTarefa = listaTarefas, context = context, navController = navController)
+        LazyColumn(contentPadding = PaddingValues(top = 90.dp)) {
+            itemsIndexed(listaTarefas) { index, _ ->
+                TarefaItem(
+                    position = index,
+                    listaTarefa = listaTarefas,
+                    context = context,
+                    navController = navController
+                )
             }
-
         }
     }
 }

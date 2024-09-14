@@ -52,10 +52,11 @@ fun TarefaItem(
             .setPositiveButton("Sim") { _, _ ->
                 tarefaRepository.deletarTarefa(titulo.toString())
 
-                scope.launch(Dispatchers.Main){
+                scope.launch(Dispatchers.Main) {
                     listaTarefa.removeAt(position)
                     navController.navigate("listaTarefas")
-                    Toast.makeText(context, "Tarefa deletada com sucesso!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Tarefa deletada com sucesso!", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             }

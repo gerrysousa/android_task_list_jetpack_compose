@@ -26,7 +26,6 @@ class MainActivity : ComponentActivity() {
                     composable("salvarTarefa") {
                         SalvarTarefa(navController)
                     }
-
                 }
             }
         }

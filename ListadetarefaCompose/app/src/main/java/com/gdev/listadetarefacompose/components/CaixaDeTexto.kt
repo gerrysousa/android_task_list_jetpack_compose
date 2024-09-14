@@ -9,7 +9,6 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import com.gdev.listadetarefacompose.ui.theme.BLACK
 import com.gdev.listadetarefacompose.ui.theme.LIGHT_BLUE
 import com.gdev.listadetarefacompose.ui.theme.ShapeEditText

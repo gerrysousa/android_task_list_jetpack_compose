@@ -5,7 +5,7 @@ import com.gdev.listadetarefacompose.model.Tarefa
 import kotlinx.coroutines.flow.Flow
 
 class TarefasRepository {
-    private val dataSource= DataSource()
+    private val dataSource = DataSource()
 
     fun salvarTarefa(titulo: String, descricao: String, prioridade: Int) {
         dataSource.salvarTarefa(titulo, descricao, prioridade)

@@ -15,7 +15,7 @@ fun Botao(
     onClick: () -> Unit,
     modifier: Modifier,
     text: String
-){
+) {
     Button(
         onClick = onClick,
         modifier = modifier,
